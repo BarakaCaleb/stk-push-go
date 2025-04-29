@@ -7,17 +7,16 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	"stkpush/internal/config"
 	"time"
+
+	"stkpush/internal/config"
 )
 
-func InitiateSTKPush(accessToken string) error {
+func InitiateSTKPush(accessToken, phoneNumber string, amount int) error {
 	url := "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest"
 
 	shortcode := config.GetEnv("BUSINESS_SHORTCODE")
 	passkey := config.GetEnv("PASSKEY")
-	phoneNumber := "254795430038" // Replace or pass dynamically
-	amount := 1
 	callbackURL := config.GetEnv("CALLBACK_URL")
 
 	timestamp := time.Now().Format("20060102150405") // yyyyMMddHHmmss
